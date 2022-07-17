@@ -32,5 +32,4 @@ It makes use of a Vagrant file with one shell script for each machine to install
 
 >kibana URL:http://localhost:8081
 
->[photo1](./photos/ph1.jpg)
 
