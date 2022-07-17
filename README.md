@@ -6,7 +6,7 @@ Deploy the ELK stack
 
 ### To run the applications:
 
->Install virtualbox and vagrant in case you don't have them
+>Install virtualbox and vagrant in case you don't have them.
 
 >Clone the repository.
 
@@ -15,7 +15,7 @@ Deploy the ELK stack
 >Run vagrant up and wait for the 2 machines to boot.
 
 ### To access the applications:
->3.Once the 2 machines have loaded:
+>Once the 2 machines have loaded:
 
 >You will be able to start configuring your wordpress page in [Wordpress](http://localhost:8085). 
 
