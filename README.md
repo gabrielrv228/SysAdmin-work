@@ -31,5 +31,6 @@ It makes use of a Vagrant file with one shell script for each machine to install
 >wordpress URL:http://localhost:8085
 
 >kibana URL:http://localhost:8081
+![Screenshot from 2021-12-17 18-34-19](https://user-images.githubusercontent.com/95095337/179399247-58b13481-c341-40ff-9334-69c40a05717e.png)
 
 
