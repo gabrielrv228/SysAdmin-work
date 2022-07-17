@@ -1,4 +1,4 @@
-# Sysadmin
+# Sysadmin Practical work
 Deploy the ELK stack
 
 ## Instructions:
