@@ -1,30 +1,31 @@
-# Sysadmin-Gabriel
-Desplegar el stack ELK
+# Sysadmin
+Deploy the ELK stack
 
-## Instrucciones:
-
-
-### Para hacer funcionar las aplicaciones:
->1.Tener instalado Virtualbox y Vagrant
-
->2.Clonar el repositorio
-
->3.Posicionarse en la carpeta de el repositorio
-
->4.Ejecutar vagrant up y esperar a que se levanten las 2 máquinas.
-
-### Para acceder a las aplicaciones:
->Una vez que hayan cargado las 2 máquinas:
-
->Podrás empezar a configurar tu página de wordpress en [Wordpress](http://localhost:8085) 
-
->Podrás ver los logs en [Kibana](http://localhost:8081)  
+## Instructions:
 
 
->Esto es un proxy de acceso, por lo cuál necesitaras un USUARIO: **"admin"** y una CONTRASEÑA: **"pass"**.
+### To run the applications:
+>1.Have Virtualbox and Vagrant installed.
 
->Después serás redirigido a la interfaz de kibana, donde podrás ver los logs de tu página web.  
+>Clone the repository.
 
->Url de wordpress:http://localhost:8085
+>Position yourself in the repository folder.
 
->Url de kibana:http://localhost:8081
+>Run vagrant up and wait for the 2 machines to wake up.
+
+### To access the applications:
+>3.Once the 2 machines have loaded:
+
+>You will be able to start configuring your wordpress page in [Wordpress](http://localhost:8085). 
+
+>You will be able to see the logs in [Kibana](http://localhost:8081)  
+
+
+>This is a proxy access, so you will need a USER: **"admin "** and a PASSWORD: **"pass "**.
+
+>Then you will be redirected to the kibana interface, where you will be able to see the logs of your website.  
+
+>wordpress URL:http://localhost:8085
+
+>kibana URL:http://localhost:8081
+
