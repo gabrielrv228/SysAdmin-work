@@ -5,13 +5,14 @@ Deploy the ELK stack
 
 
 ### To run the applications:
->1.Have Virtualbox and Vagrant installed.
+
+>Install virtualbox and vagrant in case you don't have them
 
 >Clone the repository.
 
 >Position yourself in the repository folder.
 
->Run vagrant up and wait for the 2 machines to wake up.
+>Run vagrant up and wait for the 2 machines to boot.
 
 ### To access the applications:
 >3.Once the 2 machines have loaded:
