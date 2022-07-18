@@ -13,6 +13,9 @@ Deploy the ELK stack
 - Install virtualbox and vagrant in case you don't have them.
 
 - Clone the repository.
+ ```
+ git clone https://github.com/gabrielrv228/SysAdmin-work/
+ ```
 
 - Position yourself in the repository folder.
 
