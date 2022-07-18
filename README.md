@@ -23,6 +23,9 @@ cd SysAdmin-work
 ```
 
 - Run vagrant up and wait for the 2 machines to boot.
+```
+vagrant up
+```
 
 ### To access the applications:
 - Once the 2 machines have loaded:
