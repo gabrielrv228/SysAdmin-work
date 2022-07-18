@@ -1,8 +1,8 @@
 #!/bin/bash
 sudo apt-get update
-#Instalación de dependencias
+#Install dependencies
 sudo apt-get install -y default-jre  nginx
-#Crear y montar volumen para elasticsarch 
+#Create and mount volume for elasticsearch
 sudo parted /dev/sdc mklabel gpt
 sudo parted /dev/sdc mkpart p ext4 1 3000
 
@@ -13,19 +13,19 @@ sudo lvcreate -l 100%FREE elastic -n flex
 sudo mkfs.ext4  /dev/mapper/elastic-flex 
 mkdir /var/lib/elasticsearch
 mount /dev/mapper/elastic-flex /var/lib/elasticsearch
-#Hacer que se monte al reiniciar 
+#Set volume  to mount at reboot
 cat <<\EOF >/etc/fstab
 LABEL=cloudimg-rootfs   /        ext4   defaults        0 1
 /dev/mapper/elastic-flex  /var/lib/elasticsearch   ext4  defaults   00
 EOF
 
 
-#Añadir repo elstic
+#Add repo elastic
 sudo wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
 cd /
 sudo echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
 
-#Instalación de dependencias repo elastic
+#Install dependencies elastic
 sudo apt-get update
 sudo apt-get install -y elasticsearch
 sudo apt-get install -y filebeat
@@ -33,10 +33,10 @@ sudo apt-get install -y logstash
 sudo apt-get install  -y kibana
 sudo apt-get install -y apache2-utils
 
-#Permitir puerto para recibir los logs
+#Allow port for the logs
 sudo ufw allow 5044
 
-#Configuración logstash 
+#Logstash configuration
 #Entrada de datos
 cat <<EOF >/etc/logstash/conf.d/02-beats-input.conf
 input {
@@ -45,7 +45,7 @@ input {
  }
 }
 EOF
-#Filtro
+#Log filter
 cat <<EOF >/etc/logstash/conf.d/10-syslog-filter.conf
 filter {
  if [fileset][module] == "system" {
@@ -119,7 +119,7 @@ HH:mm:ss" ]
  }
 }
 EOF
-#Salida de datos
+#Data output
 cat <<EOF >/etc/logstash/conf.d/30-elasticsearch-output.conf
 output {
  elasticsearch {
@@ -130,7 +130,7 @@ output {
 }
 EOF
 
-#Configurar kibana
+#Kibana configuration
 cat <<\EOF >/etc/kibana/kibana.yml
 # Kibana is served by a back end server. This setting specifies the port to use.
 server.port: 5601
@@ -249,17 +249,17 @@ server.host: "0.0.0.0"
 #i18n.locale: "en"
 EOF
 
-#Permisos  elastic
+#Elastic permissions
 sudo chown elasticsearch /var/lib/elasticsearch
 sudo chmod 764  /var/lib/elasticsearch
 
-#Activar servicios
+#Enable services
 sudo systemctl enable elasticsearch --now
 sudo systemctl enable logstash --now
 sudo systemctl enable kibana --now
 sudo systemctl enable filebeat --now
 
-#Configuración autenticación nginx
+#Configure nginx authentication
 cat <<EOF >/etc/nginx/sites-available/default
 # Managed by installation script - Do not change
 server {
@@ -281,8 +281,8 @@ EOF
 
 
 
-#Contraseña de de demostración de kibana.
-#CONTRASEÑA = pass
+#Demo password for kibana.
+#PASSWORD = pass
 sudo htpasswd -c /etc/nginx/htpasswd.users 
 cat <<\EOF >//etc/nginx/htpasswd.users
 admin:$apr1$V9iP4TdZ$gEZg22w9m9HW6kARPhJJX/
@@ -290,7 +290,7 @@ EOF
 
 sudo systemctl restart kibana
 sudo systemctl restart nginx
-#Comando para establecer otra contraseña:
+#Command to set another password:
 #sudo bash -c "openssl passwd -apr1  >> /etc/nginx/.htpasswd"
 
 
