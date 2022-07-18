@@ -2,9 +2,9 @@
 Deploy the ELK stack
 ## Description:
 - This work consists in the automation of a deployment that consists 2 virtual machines. One of them with worpress and mysql the other one with Elastic Search and Kibana for monitoring.
-- It makes use of a Vagrant file with one shell script for each machine to install and configure all requiered dependencies and creates 2 persistent volumes, one for the database and other for the logs.
+- It makes use of a Vagrantfile with one shell script for each machine to install and configure all requiered dependencies and creates 2 persistent volumes, one for the database and other for the logs.
 - It implemets too a proxy autentication for accessing the kibana interface.
-- It is fully configurable, you only need to replate the values with your desired ones on the shell scripts or on the vagrant file.
+- It is fully configurable, you only need to replate the values with your desired ones on the shell scripts or on the Vagrantfile.
 ## Instructions:
 
 
