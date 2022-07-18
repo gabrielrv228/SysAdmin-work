@@ -38,10 +38,6 @@ vagrant up
 - This is a proxy access, so you will need a USER: **"admin "** and a PASSWORD: **"pass "**.
 
 - Then you will be redirected to the kibana interface, where you will be able to see the logs of your website.  
-
-- wordpress preset URL:http://localhost:8085
-
-- kibana preset URL:http://localhost:8081
 ![Screenshot from 2021-12-17 18-34-19](https://user-images.githubusercontent.com/95095337/179399247-58b13481-c341-40ff-9334-69c40a05717e.png)
 
 
