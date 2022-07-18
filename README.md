@@ -10,29 +10,29 @@ Deploy the ELK stack
 
 ### To run the applications:
 
->Install virtualbox and vagrant in case you don't have them.
+- Install virtualbox and vagrant in case you don't have them.
 
->Clone the repository.
+- Clone the repository.
 
->Position yourself in the repository folder.
+- Position yourself in the repository folder.
 
->Run vagrant up and wait for the 2 machines to boot.
+- Run vagrant up and wait for the 2 machines to boot.
 
 ### To access the applications:
->Once the 2 machines have loaded:
+- Once the 2 machines have loaded:
 
->You will be able to start configuring your wordpress page in [Wordpress](http://localhost:8085). 
+- You will be able to start configuring your wordpress page in [Wordpress](http://localhost:8085). 
 
->You will be able to see the logs in [Kibana](http://localhost:8081)  
+- You will be able to see the logs in [Kibana](http://localhost:8081)  
 
 
->This is a proxy access, so you will need a USER: **"admin "** and a PASSWORD: **"pass "**.
+- This is a proxy access, so you will need a USER: **"admin "** and a PASSWORD: **"pass "**.
 
->Then you will be redirected to the kibana interface, where you will be able to see the logs of your website.  
+- Then you will be redirected to the kibana interface, where you will be able to see the logs of your website.  
 
->wordpress URL:http://localhost:8085
+- wordpress preset URL:http://localhost:8085
 
->kibana URL:http://localhost:8081
+- kibana preset URL:http://localhost:8081
 ![Screenshot from 2021-12-17 18-34-19](https://user-images.githubusercontent.com/95095337/179399247-58b13481-c341-40ff-9334-69c40a05717e.png)
 
 
