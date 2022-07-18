@@ -18,6 +18,9 @@ Deploy the ELK stack
  ```
 
 - Position yourself in the repository folder.
+```
+cd SysAdmin-work
+```
 
 - Run vagrant up and wait for the 2 machines to boot.
 
