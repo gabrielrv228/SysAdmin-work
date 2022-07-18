@@ -1,6 +1,8 @@
 #!/bin/bash
 sudo apt-get update
-#Crear y montar volumen para la database 
+
+#Create and mount volume for the database
+
 sudo parted /dev/sdc mklabel gpt
 sudo parted /dev/sdc mkpart p ext4 1 2000
 
@@ -11,15 +13,19 @@ sudo lvcreate -l 100%FREE database -n wpdbs
 sudo mkfs.ext4  /dev/mapper/database-wpdbs 
 mkdir /var/lib/mysql
 mount /dev/mapper/database-wpdbs /var/lib/mysql
-#Hacer que se monte al reiniciar 
+
+#Set volume to mount on reboot
+
 cat <<\EOF >/etc/fstab
 LABEL=cloudimg-rootfs   /        ext4   defaults        0 1
 /dev/mapper/database-wpdbs  /var/lib/mysql   ext4  defaults   00
 EOF
 
-#Instalación de paquetes:
+#Install dependencies
+
 sudo apt-get install -y nginx mariadb-server mariadb-common php-fpm php-mysql expect php-curl php-gd php-intl php-mbstring php-soap php-xml php-xmlrpc php-zip
-#Configuración ngnix:
+#Nginx gonfiguration:
+
 cat <<EOF >/etc/nginx/sites-available/wordpress
 # Managed by installation script - Do not change
 server {
@@ -42,14 +48,16 @@ deny all;
 EOF
 
 
-#Habilitar configuración ngnix
+#Enable nginx configuration
+
 sudo rm /etc/nginx/sites-enabled/default
 sudo rm /etc/nginx/sites-available/default
 
-#Crear softlink
+#Create softlink 
 sudo ln -s /etc/nginx/sites-available/wordpress /etc/nginx/sites-enabled/
 
-#Securizar mysql
+#Secure mysql instalation
+
 mysql --user=root <<_EOF_
 UPDATE mysql.user SET Password=PASSWORD('${db_root_password}') WHERE User='root';
 DELETE FROM mysql.user WHERE User='';
@@ -59,7 +67,8 @@ DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
 FLUSH PRIVILEGES;
 _EOF_
 
-#Configuracion mysql
+#Configure mysql
+
 sudo mysql -e "UPDATE mysql.user SET Password = PASSWORD('pass') WHERE User = 'root'"
 cat <<EOF >/var/test.sql
 CREATE DATABASE wordpress DEFAULT CHARACTER SET utf8 COLLATE
@@ -70,7 +79,8 @@ FLUSH PRIVILEGES;
 EOF
 sudo cat /var/test.sql | mysql -u root -ppass
 
-#Install wordpress
+#Install Wordpress
+
 cd /
 mkdir Downloads
 cd Downloads
@@ -84,7 +94,9 @@ sudo chown -R www-data:www-data /var/www/wordpress
 sudo chmod -R 775 /var/www/wordpress
 cd /var/www/wordpress
 sudo mv wp-config-sample.php wp-config.php
-#Configurar Wordpress
+
+#Configure Wordpress
+
 cat <<EOF >/var/www/wordpress/wp-config.php
 <?php
 /**
@@ -185,9 +197,12 @@ require_once ABSPATH . 'wp-settings.php';
 EOF
 
 
+#Restart nginx 
 
 sudo service nginx restart
-#Instalación filebeat
+
+#Install filebeat
+
 sudo wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
 cd /
 sudo echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
@@ -196,7 +211,9 @@ sudo apt-get update
 sudo apt-get install filebeat
 sudo filebeat modules enable system
 sudo filebeat modules enable nginx
-#Configuración de filebeat
+
+#Filebeat configuration
+
 cat <<\EOF > /etc/filebeat/filebeat.yml
 ###################### Filebeat Configuration Example #########################
 
@@ -429,6 +446,6 @@ processors:
 # This allows to enable 6.7 migration aliases
 #migration.6_to_7.enabled: true
 EOF
-#Activar filebeat
+#Enable filebeat
 sudo systemctl enable filebeat --now
 
